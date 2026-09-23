@@ -1,7 +1,7 @@
 const express = require('express');
 const authRouter = express.Router();
 
-router.get('/auth/github', (req, res) => {
+authRouter.get('/auth/github', (req, res) => {
   
   const auth_url =
     `https://github.com/login/oauth/authoriz` +
@@ -12,7 +12,7 @@ router.get('/auth/github', (req, res) => {
   res.redirect(auth_url);
 });
 
-router.get('/auth/github/callback', async (req, res) => {
+authRouter.get('/auth/github/callback', async (req, res) => {
 
   code = req.query;
 
