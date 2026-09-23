@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "scripts": {
+    "npm run dev": "node app.js"
+  }
+}
