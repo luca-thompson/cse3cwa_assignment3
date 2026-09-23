@@ -19,7 +19,7 @@ authRouter.get('/auth/github/callback', async (req, res) => {
 
   const token_params =
     `?client_id=${process.env.GITHUB_CLIENT_ID}` +
-    `?client_secret=${process.env.GITHUB_CLIENT_SECRET}` +
+    `&client_secret=${process.env.GITHUB_CLIENT_SECRET}` +
     `&code=${code}` +
     `&redirect_uri=${process.env.REDIRECT_URI}`;
   
@@ -31,7 +31,8 @@ authRouter.get('/auth/github/callback', async (req, res) => {
     body: token_params,
   });
 
-  const token = await token_fetch.json().access_token
+  const tokenData = await token_fetch.json();
+  const token = tokenData.access_token;
 
   const user_fetch = await fetch('https://api.github.com/user', {
     headers: {
@@ -41,7 +42,8 @@ authRouter.get('/auth/github/callback', async (req, res) => {
     }
   })
 
-  const user_id = await user_fetch.json().id
+  const user_id_data = await user_fetch.json();
+  const user_id = user_id_data.id;
 
   const jwt_token = jwt.sign(
     { user_id },
@@ -50,6 +52,8 @@ authRouter.get('/auth/github/callback', async (req, res) => {
   );
 
   res.cookie('token', jwt_token, {
+    secure: true,
+    sameSite: 'lax',
     httpOnly: true
   });
   

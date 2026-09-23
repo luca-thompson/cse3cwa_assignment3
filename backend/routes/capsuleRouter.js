@@ -1,10 +1,11 @@
 const express = require('express');
 const capsuleRouter = express.Router();
 const requireAuth = require("../requireAuth");
+const db = require('../db')
 
 capsuleRouter.get('/api/capsules', requireAuth, (req, res) => {
   try {
-    const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').get(req.user_id).all();
+    const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').all();
 
     if (!rows) { return res.status(404).json({ error: 'Couldnt find prompts' }) }
     
@@ -53,7 +54,7 @@ capsuleRouter.post('/api/capsules', requireAuth, (req, res) => {
         )`
       )
       .run({
-        user_id: req.userId,
+        user_id: req.user_id,
         project_name,
         prompt_title,
         prompt_version: req.body.prompt_version || null,
@@ -78,7 +79,7 @@ capsuleRouter.put('/api/capsules/:id', requireAuth, (req, res) => {
   try {
     const existing = db
       .prepare('SELECT * FROM capsules WHERE id = ? AND user_id = ?')
-      .get(req.params.id, req.userId);
+      .get(req.params.id, req.user_id);
    
     if (!existing) return res.status(404).json({ error: 'Not found' });
     
@@ -98,7 +99,7 @@ capsuleRouter.put('/api/capsules/:id', requireAuth, (req, res) => {
       WHERE id = @id AND user_id = @user_id`
     ).run({
       id: req.params.id,
-      user_id: req.userId,
+      user_id: req.user_id,
       project_name: req.body.project_name ?? existing.project_name,
       prompt_title: req.body.prompt_title ?? existing.prompt_title,
       prompt_version: req.body.prompt_version ?? existing.prompt_version,
@@ -122,7 +123,7 @@ capsuleRouter.put('/api/capsules/:id', requireAuth, (req, res) => {
 capsuleRouter.delete('/api/capsules/:id', requireAuth, (req, res) => {
   const result = db
     .prepare('DELETE FROM capsules WHERE id = ? AND user_id = ?')
-    .run(req.params.id, req.userId);
+    .run(req.params.id, req.user_id);
  
   if (result.changes == 0) return res.status(404).json({ error: 'Not found' });
   res.json({ success: true });

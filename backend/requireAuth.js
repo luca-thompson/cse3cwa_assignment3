@@ -9,7 +9,7 @@ function requireAuth(req, res, next) {
 
   try {
     //add token to req so next handler can see it\
-    req.user_id = jwt.verify(token, procss.env.JWT_SECRET).userId
+    req.user_id = jwt.verify(token, process.env.JWT_SECRET).user_id
     next();
   }
   catch (err) {
