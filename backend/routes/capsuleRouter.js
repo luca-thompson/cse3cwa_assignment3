@@ -40,6 +40,8 @@ capsuleRouter.post('/api/capsules', requireAuth, (req, res) => {
     return res.status(400).json({ error: 'Missing required field' });
   }
 
+  console.log(req.user_id);
+  
   try {
     const result = db
       .prepare(
