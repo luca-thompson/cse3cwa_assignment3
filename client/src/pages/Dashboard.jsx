@@ -75,22 +75,29 @@ export default function Dashboard() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+  
     const url = editingId ? `/api/capsules/${editingId}` : '/api/capsules';
     const method = editingId ? 'PUT' : 'POST';
-
+  
     const res = await fetch(url, {
       method,
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
-
-    if (res.status == 401) {
+  
+    if (res.status === 401) {
       window.location.href = '/login';
       return;
     }
-
+  
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      console.error('Failed to save capsule:', err);
+      alert(err.error || 'Failed to save capsule');
+      return;
+    }
+  
     cancelEdit();
     loadCapsules();
   }
