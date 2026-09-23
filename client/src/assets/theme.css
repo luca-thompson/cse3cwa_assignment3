@@ -1,0 +1,78 @@
+/* Global theme — import once in main.jsx: import './theme.css' */
+
+body {
+  margin: 0;
+  background: #0b1220;
+  color: #e7ecf7;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+#root {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1, h2 {
+  color: #e7ecf7;
+}
+
+p {
+  color: #93a1c2;
+}
+
+a {
+  color: #4d7cfe;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #93a1c2;
+  font-size: 0.875rem;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background: #121c30;
+  border: 1px solid #24365a;
+  border-radius: 4px;
+  color: #e7ecf7;
+  font-family: inherit;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: 1px solid #24365a;
+  border-radius: 4px;
+  background: #4d7cfe;
+  color: #0b1220;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="button"] {
+  background: transparent;
+  color: #93a1c2;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #121c30;
+  border: 1px solid #24365a;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}

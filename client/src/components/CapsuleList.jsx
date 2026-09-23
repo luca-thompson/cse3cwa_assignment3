@@ -2,7 +2,7 @@ export default function CapsuleList({ capsules, onEdit, onDelete }) {
   return (
     <>
       <h2>Your capsules</h2>
-      {capsules.length === 0 && <p>No capsules yet.</p>}
+      {capsules.length == 0 && <p>No capsules yet.</p>}
       <ul>
         {capsules.map((c) => (
           <li key={c.id}>

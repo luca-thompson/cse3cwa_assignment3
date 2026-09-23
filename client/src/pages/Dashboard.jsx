@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import CapsuleForm from './CapsuleForm';
-import CapsuleList from './CapsuleList';
+import CapsuleForm from '../components/CapsuleForm';
+import CapsuleList from '../components/CapsuleList';
 
 const EMPTY_FORM = {
   project_name: '',
@@ -29,7 +29,7 @@ export default function Dashboard() {
   async function loadCapsules() {
     const res = await fetch('/api/capsules', { credentials: 'include' });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }
@@ -86,7 +86,7 @@ export default function Dashboard() {
       body: JSON.stringify(form),
     });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }
@@ -101,7 +101,7 @@ export default function Dashboard() {
       credentials: 'include',
     });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }

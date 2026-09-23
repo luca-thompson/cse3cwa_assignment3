@@ -1,0 +1,14 @@
+/* List-specific styles — import in CapsuleList.jsx: import './CapsuleList.css' */
+
+li strong {
+  font-size: 1.05rem;
+}
+
+li button {
+  margin-top: 0.5rem;
+}
+
+li button:last-child {
+  background: #e5484d;
+  color: #fff;
+}
