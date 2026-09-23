@@ -33,7 +33,7 @@ capsuleRouter.get('/api/capsules/:id', requireAuth, (req, res) => {
   }
 });
 
-router.post('/api/capsules', requireAuth, (req, res) => {
+capsuleRouter.post('/api/capsules', requireAuth, (req, res) => {
   const { project_name, prompt_title, prompt_text } = req.body;
   if (!project_name || !prompt_title || !prompt_text) {
     return res.status(400).json({ error: 'Missing required field' });
@@ -74,7 +74,7 @@ router.post('/api/capsules', requireAuth, (req, res) => {
   res.status(201).json({ id: result.lastInsertRowid });
 });
 
-router.put('/api/capsules/:id', requireAuth, (req, res) => {
+capsuleRouter.put('/api/capsules/:id', requireAuth, (req, res) => {
   try {
     const existing = db
       .prepare('SELECT * FROM capsules WHERE id = ? AND user_id = ?')
@@ -119,7 +119,7 @@ router.put('/api/capsules/:id', requireAuth, (req, res) => {
   res.json({ success: true });
 });
 
-router.delete('/api/capsules/:id', requireAuth, (req, res) => {
+capsuleRouter.delete('/api/capsules/:id', requireAuth, (req, res) => {
   const result = db
     .prepare('DELETE FROM capsules WHERE id = ? AND user_id = ?')
     .run(req.params.id, req.userId);

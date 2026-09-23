@@ -1,5 +1,6 @@
 const express = require('express');
 const authRouter = express.Router();
+const jwt = require('jsonwebtoken')
 
 authRouter.get('/auth/github', (req, res) => {
   
@@ -14,7 +15,7 @@ authRouter.get('/auth/github', (req, res) => {
 
 authRouter.get('/auth/github/callback', async (req, res) => {
 
-  code = req.query;
+  code = req.query.code;
 
   const token_params =
     `?client_id=${process.env.GITHUB_CLIENT_ID}` +

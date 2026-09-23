@@ -1,7 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
 const cookieParser = require("cookie-parser");
 const app = express();
-require('dotenv').config();
+const path = require('path');
 
 app.use(express.json());
 app.use(cookieParser())
@@ -18,10 +20,10 @@ app.get('/api/health', (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('*', (req, res) => {
+app.get('/{*any}', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Server listening on port ${process.env.PORT}`);
 });
