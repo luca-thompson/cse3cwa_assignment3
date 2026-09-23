@@ -12,7 +12,7 @@ capsuleRouter.get('/api/capsules', requireAuth, (req, res) => {
     return res.status(200).json(rows);
   }
   catch (err) {
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error', e: err });
   }
 });
 
