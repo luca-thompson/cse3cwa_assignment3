@@ -87,3 +87,5 @@ Response
 ```
 {"error":"JWT signature not valid, 401 Unauthorized"}
 ```
+
+###
