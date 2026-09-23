@@ -17,8 +17,6 @@ authRouter.get('/auth/github/callback', async (req, res) => {
 
   const code = req.query.code;
 
-  console.log(req.query.code);
-
   const token_params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET,
@@ -37,8 +35,6 @@ authRouter.get('/auth/github/callback', async (req, res) => {
 
   const tokenData = await token_fetch.json();
   const token = tokenData.access_token;
-
-  console.log(tokenData)
 
   const user_fetch = await fetch('https://api.github.com/user', {
     headers: {

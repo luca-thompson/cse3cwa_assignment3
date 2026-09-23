@@ -69,13 +69,13 @@ capsuleRouter.post('/api/capsules', requireAuth, (req, res) => {
         screenshot_url: req.body.screenshot_url || null,
         notes: req.body.notes || null,
       });
+
+    res.status(201).json({ id: result.lastInsertRowid });
   }
   catch (err) {
     console.log('POST /api/capsules failed:', err);
     return res.status(500).json({ error: 'Internal server error' });
   }
-
-  res.status(201).json({ id: result.lastInsertRowid });
 });
 
 capsuleRouter.put('/api/capsules/:id', requireAuth, (req, res) => {
