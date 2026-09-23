@@ -88,4 +88,12 @@ Response
 {"error":"JWT signature not valid, 401 Unauthorized"}
 ```
 
-###
+### Limitation
+There are a few; UI could use time and animations, Storage needs to be extracted out into something non-ephemeral, and the startup time for the service when it hasnt been used in some time is annoyingly long.
+
+### AI Usage
+The only AI tool used was Claude by Anthropic.
+AI constantly made naming errors and had issues with out of date ways of using APIs, I had to correct api usage for github as it was using an old defunct method/version.
+Ai was used extensively for architechting and explaining the various parts of the jwt/oauth systems as I was inexperienced with them.
+I verified Oauth, JWT and protected API behaviour through a significant amount of (basically just) console.log commands at every stage of the flow. The same goes for CRUD ownership, I also manually inserted a second user in testing to ensure only that user's data was shown/editable.
+I chose to break up the frontend into components for the dashboard, to use render environment variables instead of .env secret file and to break auth routing into its own file, instead of living a monolithic auth in backend root.
