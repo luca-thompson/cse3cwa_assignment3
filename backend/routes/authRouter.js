@@ -17,6 +17,8 @@ authRouter.get('/auth/github/callback', async (req, res) => {
 
   const code = req.query.code;
 
+  console.log(req.query.code);
+
   const token_params =
     `?client_id=${process.env.GITHUB_CLIENT_ID}` +
     `&client_secret=${process.env.GITHUB_CLIENT_SECRET}` +
@@ -34,6 +36,8 @@ authRouter.get('/auth/github/callback', async (req, res) => {
   const tokenData = await token_fetch.json();
   const token = tokenData.access_token;
 
+  console.log(tokenData)
+
   const user_fetch = await fetch('https://api.github.com/user', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -45,11 +49,15 @@ authRouter.get('/auth/github/callback', async (req, res) => {
   const user_id_data = await user_fetch.json();
   const user_id = user_id_data.id;
 
+  console.log(user_id_data)
+  
   const jwt_token = jwt.sign(
     { user_id },
     process.env.JWT_SECRET,
     {} //put expiry time here if necessary
   );
+
+  console.log(jwt_token)
 
   res.cookie('token', jwt_token, {
     secure: true,
