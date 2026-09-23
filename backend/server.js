@@ -12,8 +12,16 @@ const capsuleRouter = require('./routes/capsuleRouter')
 app.use('/', authRouter)
 app.use('/', capsuleRouter)
 
-const port = 3000;
+app.get('/api/health', (req, res) => {
+  res.json({ status: "ok" })
+});
 
-app.listen(port, () => {
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
+app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${port}`);
 });
