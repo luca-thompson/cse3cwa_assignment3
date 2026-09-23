@@ -19,18 +19,20 @@ authRouter.get('/auth/github/callback', async (req, res) => {
 
   console.log(req.query.code);
 
-  const token_params =
-    `?client_id=${process.env.GITHUB_CLIENT_ID}` +
-    `&client_secret=${process.env.GITHUB_CLIENT_SECRET}` +
-    `&code=${code}` +
-    `&redirect_uri=${process.env.GITHUB_CALLBACK_URL}`;
+  const token_params = new URLSearchParams({
+    client_id: process.env.GITHUB_CLIENT_ID,
+    client_secret: process.env.GITHUB_CLIENT_SECRET,
+    code: code,
+    redirect_uri: process.env.GITHUB_CALLBACK_URL,
+  });
   
   const token_fetch = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: token_params,
+    body: token_params.toString(),
   });
 
   const tokenData = await token_fetch.json();
