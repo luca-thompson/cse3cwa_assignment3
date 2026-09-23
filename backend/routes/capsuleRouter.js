@@ -69,6 +69,7 @@ capsuleRouter.post('/api/capsules', requireAuth, (req, res) => {
       });
   }
   catch (err) {
+    console.log('POST /api/capsules failed:', err);
     return res.status(500).json({ error: 'Internal server error' });
   }
 
