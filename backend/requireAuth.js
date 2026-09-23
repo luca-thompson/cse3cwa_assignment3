@@ -4,7 +4,7 @@ function requireAuth(req, res, next) {
   const token = req.cookies.token
 
   if (!token) {
-    return res.status(401).json({ error: "No JWT found, Unauthorized" })
+    return res.status(401).json({ error: "No JWT found, 401 Unauthorized" })
   }
 
   try {
@@ -13,7 +13,7 @@ function requireAuth(req, res, next) {
     next();
   }
   catch (err) {
-    return res.status(401).json({ error: "JWT signature not valid, Unauthorized" })
+    return res.status(401).json({ error: "JWT signature not valid, 401 Unauthorized" })
   }
 }
 
