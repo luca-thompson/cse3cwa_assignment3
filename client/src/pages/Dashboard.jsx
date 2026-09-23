@@ -27,7 +27,7 @@ export default function Dashboard() {
   async function loadCapsules() {
     const res = await fetch('/api/capsules', { credentials: 'include' });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }
@@ -77,7 +77,7 @@ export default function Dashboard() {
       body: JSON.stringify(form),
     });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }
@@ -92,7 +92,7 @@ export default function Dashboard() {
       credentials: 'include',
     });
 
-    if (res.status === 401) {
+    if (res.status == 401) {
       window.location.href = '/login';
       return;
     }
@@ -204,7 +204,7 @@ export default function Dashboard() {
       </form>
 
       <h2>Your capsules</h2>
-      {capsules.length === 0 && <p>No capsules yet.</p>}
+      {capsules.length == 0 && <p>No capsules yet.</p>}
       <ul>
         {capsules.map((c) => (
           <li key={c.id}>

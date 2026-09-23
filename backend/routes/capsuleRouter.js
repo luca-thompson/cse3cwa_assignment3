@@ -5,14 +5,14 @@ const db = require('../db')
 
 capsuleRouter.get('/api/capsules', requireAuth, (req, res) => {
   try {
-    const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').all();
+    const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').all(req.user_id);
 
     if (!rows) { return res.status(404).json({ error: 'Couldnt find prompts' }) }
     
     return res.status(200).json(rows);
   }
   catch (err) {
-    return res.status(500).json({ error: 'Internal server error', e: err });
+    return res.status(500).json({ error: 'Internal server error'});
   }
 });
 
