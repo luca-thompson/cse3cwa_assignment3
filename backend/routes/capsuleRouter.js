@@ -1,6 +1,6 @@
 const express = require('express');
 const capsuleRouter = express.Router();
-const requireAuth = require("../auth");
+const requireAuth = require("../requireAuth");
 
 capsuleRouter.get('/api/capsules', requireAuth, (req, res) => {
   try {
@@ -13,4 +13,4 @@ capsuleRouter.get('/api/capsules', requireAuth, (req, res) => {
 
 
 
-module.exports = cropsRouter;
+module.exports = capsuleRouter;

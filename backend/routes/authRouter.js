@@ -4,7 +4,7 @@ const authRouter = express.Router();
 authRouter.get('/auth/github', (req, res) => {
   
   const auth_url =
-    `https://github.com/login/oauth/authoriz` +
+    `https://github.com/login/oauth/authorize` +
     `?client_id=${process.env.GITHUB_CLIENT_ID}` +
     `&scope=${process.env.SCOPE}` +
     `&redirect_uri=${process.env.REDIRECT_URI}`;
