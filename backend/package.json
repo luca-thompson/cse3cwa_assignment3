@@ -1,8 +1,10 @@
 {
   "dependencies": {
-    "better-sqlite3": "^13.0.3"
+    "better-sqlite3": "^13.0.3",
+    "cookie-parser": "^1.4.7",
+    "jsonwebtoken": "^9.0.3"
   },
   "scripts": {
-    "npm run dev": "node app.js"
+    "npm run dev": "node server.js"
   }
 }
