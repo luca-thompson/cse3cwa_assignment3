@@ -21,7 +21,7 @@ authRouter.get('/auth/github/callback', async (req, res) => {
     `?client_id=${process.env.GITHUB_CLIENT_ID}` +
     `&client_secret=${process.env.GITHUB_CLIENT_SECRET}` +
     `&code=${code}` +
-    `&redirect_uri=${process.env.REDIRECT_URI}`;
+    `&redirect_uri=${process.env.GITHUB_CALLBACK_URL}`;
   
   const token_fetch = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
